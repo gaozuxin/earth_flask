@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tool/generateplu.css') }}">
+    <script src="{{ url_for('static',filename='js/tool/generateplu.js') }}"></script>
+</head>
+<span>{{ con.plucode }}</span>
+<body>
+<pre>
+<input type="file" name="xlfile" id="xlf">
+<button type="button" class="btn btn-danger"><a href="Techrecord.html" rel="external nofollow" rel="external nofollow" >返回</a></button>
+<input type="checkbox" name="useworker" checked="" style="display: none;">
+<input type="checkbox" name="xferable" checked="" style="display: none;">
+<input type="checkbox" name="userabs" checked="" style="display: none;">
+</pre>
+<button class="submit_all">提交</button>
+<pre id="out"></pre>
+<br>
+</body>
+</html>

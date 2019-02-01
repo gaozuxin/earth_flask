@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" type="image/ico" href={{url_for('static', filename='images/favicon.ico')}}/>
+        <link rel="shortcut icon" type="image/ico" href={{url_for('static', filename='images/favicon.ico')}} />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
+        <title>{% block title %}-测试小工具{% endblock %} </title>
+    {% endblock %}
+</head>
+
+
+<body onload = "side_show(1)">
+{% block body1 %}
+<div class ="navbar">
+    <div class ="col-md-2 nav-brand">
+        <a>地球港测试小工具</a>
+    </div>
+    <nav class ="col-md-10 ">
+        <ul>
+            <li onclick="side_show(1)">
+                <span>用例管理</span>
+            </li>
+            <li onclick="side_show(2)" >
+                <span>测试小工具</span>
+            </li>
+            <li onclick="side_show(3)" >
+                <span>系统配置</span>
+            </li>
+             <li style="text-align:center;float:right">
+                <a href='/logout/'>注销 </a>
+            </li>
+            <li style="text-align:center;float:right">
+                <span>{{g.user_name}}</span>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+<div class="content_row">
+    <div class ="col-md-2 sidebar">
+        <div class="" id="div1">
+            <ul>
+                <li onclick="content_show(event)" >
+                    <span>测试用例</span>
+                </li>
+                <li onclick="content_show(event)" >
+                    <span id="span2">测试脚本</span>
+                </li>
+                <li onclick="content_show(event)" >
+                    <span>测试脚本组</span>
+                </li>
+            </ul>
+	    </div>
+
+        <div class="" id="div2">
+            <ul>
+                <li onclick="content_show(event)">
+                    <span>自动生成PLU码</span>
+                </li>
+                <li onclick="content_show(event)">
+                    <span>批次自动拣货缺</span>
+                </li>
+                <li onclick="content_show(event)">
+                    <span>批次自动拣货</span>
+                </li>
+            </ul>
+        </div>
+        <div class="" id="div3">
+            <ul>
+                <li onclick="content_show(event)">
+                    <span>URL路径配置</span>
+                </li>
+                <li onclick="content_show(event)">
+                    <span>数据库配置</span>
+                </li>
+    			<li onclick="content_show(event)">
+    				<span>redis配置</span>
+    			</li>
+            </ul>
+        </div>
+    </div>
+    <div class = "col-md-10 content1">
+         {% block content %}内容{% endblock %}
+    </div>
+</div>
+
+    <div id="footer">
+    {% block  footer %}
+    <script>"This is javascript code" </script>
+    {% endblock %}
+    </div>
+    <script src="/static/js/jquery/jquery.js"></script>
+    <script>
+		function content_show(e) {
+            switch (e.target.innerText) {
+                case "用例管理":
+                    $("#divwrap iframe").attr("src", "/testcase/");
+                    break;
+                case "测试用例":
+                    {#window.location.href='/generateplu/';#}
+                    window.location.href="/testcase/";
+                    break;
+                case "测试脚本":
+                    $("#divwrap iframe").attr("src", "/testscript/");
+                    break;
+                case "测试脚本组":
+                    $("#divwrap iframe").attr("src", "/testscriptgroup/");
+                    break;
+                case "测试小工具":
+                    $("#divwrap iframe").attr("src", "/generateplu/");
+                    break;
+                case "自动生成PLU码":
+                    $("#divwrap iframe").attr("src", "/generateplu/");
+                    break;
+                case "批次自动拣货缺":
+                    $("#divwrap iframe").attr("src", "/pickinglack/");
+                    break;
+                case "批次自动拣货":
+                    $("#divwrap iframe").attr("src", "/autopicking/");
+                    break;
+                case "系统配置":
+                    $("#divwrap iframe").attr("src", "/urlpath/");
+                    break;
+                case "URL路径配置":
+                    $("#divwrap iframe").attr("src", "/urlpath/");
+                    break;
+                case "数据库配置":
+                    $("#divwrap iframe").attr("src", "/databaseconfig/");
+                    break;
+                case "redis配置":
+                    $("#divwrap iframe").attr("src", "");
+                    break;
+                default:
+                    $("#divwrap iframe").attr("src", "/testcase/");
+
+
+                    break;
+            }
+        }
+        function side_show(num) {
+                for (var i = 1; i <= 3; i++) {
+                    document.getElementById("div" + i).style.display = "none";
+                }
+                document.getElementById("div" + num).style.display = "block";
+                content_show(event)
+        }
+    </script>
+
+</body>
+
+</html>

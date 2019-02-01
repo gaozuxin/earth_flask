@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>登录 - 测试工具</title>
+    <link rel="icon" type="image/ico" href={{ url_for('static', filename='images/favicon.ico') }}/>
+    <link rel="shortcut icon" type="image/ico" href={{ url_for('static', filename='images/favicon.ico') }}/>
+    <!--FF下可用gif动态icon-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <style type="text/css">
+        .download {
+            margin: 20px 33px 10px;
+            *margin-bottom: 30px;
+            padding: 5px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            background: #e6e6e6;
+            border: 1px dashed #df0031;
+            font-size: 14px;
+            font-family: Comic Sans MS;
+            font-weight: bolder;
+            color: #555
+        }
+
+        .download a {
+            padding-left: 5px;
+            font-size: 14px;
+            font-weight: normal;
+            color: #555;
+            text-decoration: none;
+            letter-spacing: 1px
+        }
+
+        .download a:hover {
+            text-decoration: underline;
+            color: #36F
+        }
+
+        .download span {
+            float: right
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="main">
+    <div class="header hide">地球港测试平台</div>
+    <div class="content">
+        <div class="title hide">用户登录</div>
+
+        <div class="input">
+            <input class="input_all name" id="uname" name="j_username" value="gaozuxin" placeholder="请输入用户名" type="text"
+                   onFocus="this.className='input_all name_now';" onBlur="this.className='input_all name'"
+                   maxLength="24"/>
+        </div>
+        <div class="input">
+            <input class="input_all password" id="password" name="j_password" value="123456" placeholder="请输入密码"
+                   type="password" onFocus="this.className='input_all password_now';"
+                   onBlur="this.className='input_all password'" maxLength="24"/>
+        </div>
+
+        <br>
+        <p class="loginMsg"></p>
+        <div class="enter" style="/* margin-left:12em */text-align:  center;">
+            <button style="background:#3d85ff;font-size:14px;color:#ffffff;width:70px;height:40px;border:  none;/*border-radius: 25px;*/margin-right:  30px;cursor:  pointer;"
+                    type="submit" id="btn0" onclick="regist()">注册
+            </button>
+            <button style="background:#3d85ff;font-size:14px;color:#ffffff;width:70px;height:40px;border:  none;/*border-radius: 25px;*/margin-right:  30px;cursor:  pointer;"
+                    type="submit" id="btn" onclick="login()">登录
+            </button>
+        </div>
+
+    </div>
+</div>
+{#<!--<script src="{{url_for('static',filename='js/placeholder.js')}}"></script>-->#}
+
+<div class="clear"></div>
+
+
+<script src="{{ url_for('static',filename='js/jquery/jquery.js') }}"></script>
+
+<script>
+
+    // function checkForm(){
+    // var uname = $('#uname').val();
+    // if(uname == ''){
+    //     $('#errInfo').html('用户名不为空，请输入');
+    //     $('#uname').
+    //
+    //
+    // focus();
+    //     return false;
+    // }
+    //
+    // var password = $('#password').val();
+    // if(password == ''){
+    //     $('#errInfo').html('密码不为空请输入，请输入');
+    //     $('#password').focus();
+    //     return false;
+    // }
+    //
+    // }
+
+    // $(document).ready(function(){
+    //    $('#btn').click(
+    function login() {
+        $.ajax({
+            type: 'POST',
+            url: '/login/',
+            data: {
+                name: $("input[name='j_username']").val(),
+                password: $("input[name='j_password']").val()
+            },
+            // dataType: 'jsonp', //希望服务器返回json格式的数据
+            // jsonp: "callback",
+            // jsonpCallback: "successCallback",//回调方法
+            success: function (res) {
+                res = JSON.parse(res);
+                // console.log("调用成功");
+                // window.location.reload(); //刷新当前页面
+                // location.reload(); //刷新当前页面
+                // location.href ="http://127.0.0.1/index";
+                if (res.status === "1") {
+                    {#alert("登录成功");#}
+                    {#location.reload(); //刷新当前页面#}
+                    window.location.href = "http://127.0.0.1:8080/";
+                } else {
+                    $(".loginMsg").text(res.msg).css({"color": "red", "text-align": "center"});
+                    {#alert(res.statusinfo)#}
+                }
+            },
+            error: function (e) {
+                alert(e)
+            }
+        });
+    }
+
+
+    function regist() {
+        $.ajax({
+            type: 'POST',
+            url: '/regist/',
+            data: {
+                name: $("input[name='j_username']").val(),
+                password: $("input[name='j_password']").val()
+            },
+            // dataType: 'jsonp', //希望服务器返回json格式的数据
+            // jsonp: "callback",
+            // jsonpCallback: "successCallback",//回调方法
+            success: function (res) {
+                res = JSON.parse(res);
+                // console.log("调用成功");
+                // window.location.reload(); //刷新当前页面
+                // location.reload(); //刷新当前页面
+                // location.href ="http://127.0.0.1/home";
+                if (res.status === "1") {
+                    $(".loginMsg").text(res.msg).css({"color": "red", "text-align": "center"});
+                    window.location.reload(); //刷新当前页面
+                } else {
+                    $(".loginMsg").text(res.msg).css({"color": "red", "text-align": "center"});
+                }
+
+            },
+            error: function (e) {
+                alert(e)
+            }
+        });
+    }
+
+    // });
+    // });
+</script>
+</body>
+</html>

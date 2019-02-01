@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tool/generateplu.css') }}">
+    <script src="{{ url_for('static',filename='js/tool/generateplu.js') }}"></script>
+</head>
+
+<body>
+{#   <h3>生成二维码</h3>#}
+    <div class="wrap-div">
+        <form  id="form1" class="plu-form" action="/generateplu/" method="post">
+
+            <div class="left-div">
+                <div>
+                    <lable class="label">SkUID:</lable>
+                    <input class="input" type="text" id="skuid" name="skuid" class="input">
+                </div>
+                <div >
+                    <lable class="label">重&nbsp;&nbsp;&nbsp;量:</lable>
+                    <input type="text" id="weight" name="weight" class="input">
+                </div>
+                <input class="input-submit" type=submit name="submit1" value="生成二维码" onclick="return check(this.form)">
+            </div>
+        </form>
+
+        <div class="right-div">
+            <div class="qr-show" id="canvas" style="color:#bbb;font-size: 16px;text-align:center;line-height: 256px">
+                    此处生成二维码
+            </div>
+            <div class="code-show" >
+                PLU码：
+                <label id="plu-code">{{content.plucode}}</label>
+            </div>
+                <span id="plu-span" ></span>
+             <input type="button" id="show-img" onclick="showimg()" value="显示PLU">
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+
+    <script src="/static/js/jquery/jquery.js"></script>
+    <script src="/static/js/jquery/jquery.qrcode.min.js"></script>
+    <script src="/static/js/jquery/jquery.form.js"></script>
+<script>
+
+
+$(function () {
+
+    if($("#plu-code").text() !== ''){
+        showimg();
+    }
+
+});
+
+
+    function showimg() {
+        $("#canvas").empty();
+            //canvas方式生成二维码（二维码是一张图片）
+            $("#canvas").qrcode($("#plu-code").text());
+    }
+
+    function check(form) {
+        if($("#skuid").val()==''){
+            alert("请输入skuid!");
+            return false;
+        }
+        if($("#weight").val()==''){
+            alert("请输入重量!");
+            return false;
+         }
+        return true;
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{## 继承base.html文件#}
+<head>
+{% block title %}
+    测试用例-{{ super() }}
+
+{% endblock %}
+
+
+
+{% block content %}
+{## 定制title部分的内容#}
+
+{#{% block body1 %}#}
+    {{  super()  }}
+{#    # 用于获取原有的信息#}
+{#    <style type='text/css'>#}
+{#    .important { color: #FFFFFF }#}
+{#    </style>#}
+{#{% endblock %}#}
+
+	<div class="page-header">
+		<h2>
+			<span>测试用例</span>
+		</h2>
+        	<div class="page-content">
+        <div>
+            <div class="col-md-3">
+                <label for="case-id">用例编号:</label>
+                    <div class="col-md-8">
+                    <input id="case-id" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div>
+                <label for="case-name">用例名称:</label>
+            </div>
+                <div>
+                    <input id="case-name" type="text" placeholder="">
+                </div>
+
+                <select name="" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+
+
+            <div>
+                <label for="project_name">项目名称:</label>
+                <input id="project_name" type="text" placeholder="">
+
+                <label for="creat-user">创  建  人:</label>
+                <input id="creat-user" type="text" placeholder="">
+            </div>
+			<div class="search-div">
+                <input class="form-control" type="文件名" name="file" value="请上传excel文件">
+				<button id="buttonSearch" type="button" onclick="search()">搜索</button>
+				<button id="buttonClean" type="button" onclick="clean()">重置</button>
+			</div>
+        </div>
+
+		<table>
+			<thead>
+				<th>User_id</th>
+
+                <th>User_name</th>
+
+				<th>User_pwd</th>
+
+			</thead>
+			<tbody>
+{#            console.log({{user}})#}
+{#            var user={{user}}#}
+{#            {% for i in range(len(user.length)) %}#}
+            {% for item in user %}
+                <tr>
+                    <td>{{item.user_id}}</td>
+                    <td>{{item.user_name}}</td>
+                    <td>{{item.user_password}}</td>
+                </tr>
+            {% endfor %}
+
+
+
+
+
+			</tbody>
+			<!--<footer>-->
+
+			<!--</footer>-->
+		</table>
+	</div>
+
+	</div>
+
+<script type="text/javascript">
+         function search() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: {
+                        name: $("input[name='j_username']").val(),
+                        password: $("input[name='j_password']").val()
+                    },
+                    // dataType: 'jsonp', //希望服务器返回json格式的数据
+                    // jsonp: "callback",
+                    // jsonpCallback: "successCallback",//回调方法
+                    success: function (res) {
+                        // console.log("调用成功");
+                        // window.location.reload(); //刷新当前页面
+                        // location.reload(); //刷新当前页面
+                        // location.href ="http://127.0.0.1/home";
+						if(res.stutas="0"){
+	                        window.location.href = "http://127.0.0.1/home";
+						}else{
+						    alert(res.statusinfo)
+						}
+
+                    },
+					error:function (e) {
+						alert(e)
+                    }
+                });
+            }
+</script>
+
+{% endblock %}
+
+{## 其他不修改的原封不同的继承#}

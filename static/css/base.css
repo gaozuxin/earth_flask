@@ -1,0 +1,150 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,body {
+	height: 100%;
+	overflow: hidden;
+    width: auto;
+}
+
+.navbar{
+    height: 5em;
+    background-color: #E5E5E5;
+    line-height: 5em;
+}
+
+.content_row{
+
+    height: calc(100% - 5em);
+}
+
+.content1{
+    height: 100%;
+	position: fixed;
+	left: 16.7%;
+	top: 5em;
+	/*padding-top: 1.2em;*/
+	/*background: #E5E5E5;*/
+    /*text-align:center;*/
+}
+
+
+.col-md-2{
+    width:16.7%;
+    display:inline-block;
+    /*text-align: center;*/
+}
+
+.col-md-10{
+    width:83.3%;
+    display:inline-block;
+}
+
+ul li {
+	list-style: none;
+	height:45px;
+	line-height:45px;
+	overflow:hidden;
+	vertical-align:middle;
+}
+
+.nav-brand{
+	/*height:5em;*/
+    text-align: center;
+	background-color: #9FB6CD;
+
+}
+
+.nav-brand a{
+	/*height:5em;*/
+	/*line-height:5em;*/
+	overflow:hidden;
+	vertical-align:middle;
+	font-weight:bold;
+	/*font-style:italic;*/
+	font-size: 18px;
+	/*color:#00CDCD;*/
+}
+
+nav {
+	/*margin-left: 4em;*/
+	position: fixed;
+	/*left: 12em;*/
+	top: 0;
+	width: 83.3%;
+	height: 5em;
+	background: #E5E5E5;
+	/*color: #FFFFFF;*/
+    line-height: 5em;
+}
+
+nav ul {
+	width: 80%;
+	/*padding-left: 1.2em;*/
+}
+
+nav ul li {
+	float: left;
+	width: 14%;
+	line-height: 5em;
+	height: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+nav ul li:hover {
+	background: #87CEFA;
+	color: #228B22;
+}
+
+.sidebar {
+    /*text-align: center;*/
+	height: 100%;
+	position: fixed;
+
+	/*left: 0;*/
+	/*top: 5em;*/
+	/*padding-top: 1.2em;*/
+	background: #E5E5E5;
+    text-align:center;
+
+}
+
+
+.sidebar ul li {
+	height: 3.5em;
+	cursor: pointer;
+	text-align: left;
+	padding-left:30%;
+	font-size: 14px;
+    line-height: 3.5em;
+    width: 100%;
+}
+
+.sidebar ul li:hover {
+	background: #87CEFA;
+	color: #228B22;
+}
+
+a{
+	text-decoration:none;
+}
+
+/*#divwrap{*/
+	/*position: absolute;*/
+	/*!*left: 12em;*!*/
+	/*top: 5em;*/
+	/*width: calc(83.3%);*/
+	/*height: calc(100% - 5em);*/
+	/*background: #E5E5E5;*/
+
+/*}*/
+
+/*#divwrap iframe{*/
+	/*background: #E5E5E5;*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+	/*border: 0;*/
